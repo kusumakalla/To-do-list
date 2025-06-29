@@ -1,18 +1,19 @@
-import { createTask, taskStorage } from "./task";
+import { createTask } from "./task";
 import { createList } from "./list";
+import { showDashBoard } from "./dashboard";
 
 let header = document.querySelector("header");
 function createHeader() {
 
+    header.textContent = "";
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("headerDiv");
 
-    const dashboardDiv = document.createElement("div");
-    dashboardDiv.classList.add("dashboardDiv");
+    const headerDivText = document.createElement("h1");
+    headerDivText.textContent = "Mission Possible";
 
-    const dashboardText = document.createElement("h2");
-    dashboardText.textContent = "Dashboard";
-
-    dashboardDiv.appendChild(dashboardText);
-    header.appendChild(dashboardDiv);
+    headerDiv.appendChild(headerDivText);
+    header.appendChild(headerDiv);
 
     const navListDiv = document.createElement("div");
     navListDiv.classList.add("navListDiv");
@@ -20,7 +21,10 @@ function createHeader() {
     const newListButton = document.createElement("button");
     newListButton.classList.add("newListButton");
     newListButton.textContent = "New List";
-    newListButton.addEventListener("click", createNewList);
+    newListButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        createNewList();
+    });
 
     const newTaskButton = document.createElement("button");
     newTaskButton.classList.add("newTaskButton");
@@ -37,73 +41,90 @@ function createHeader() {
 
 function createNewList() {
 
-    const listForm = document.createElement("form");
+
     const dialoge = document.createElement("dialog");
-    dialoge.classList.add("dialoge");
+    const listForm = document.createElement("form");
+    listForm.classList.add("dialoge");
     const listNameLabel = document.createElement("label");
     listNameLabel.setAttribute('for', 'listName');
-    listNameLabel.textContent = "List Name";
-    dialoge.appendChild(listNameLabel);
+    listNameLabel.textContent = "List Name : ";
+    listForm.appendChild(listNameLabel);
     const listNameInput = document.createElement("input");
     listNameInput.setAttribute('id', 'listName');
     listNameInput.setAttribute('type', 'text');
-    dialoge.appendChild(listNameInput);
+    listForm.appendChild(listNameInput);
 
 
     const addListBtn = document.createElement("button");
     addListBtn.classList.add("addListBtn");
+    addListBtn.setAttribute("type", "button")
     addListBtn.textContent = "Create List";
-    dialoge.appendChild(addListBtn);
+    listForm.appendChild(addListBtn);
 
     addListBtn.addEventListener("click", () => {
-        let listNameEntered = listNameInput.value;
+        let listNameEntered = listNameInput.value.trim();
         createList(listNameEntered);
+        dialoge.close();
+        showDashBoard();
+        // showDashBoard();
     }
     )
-    listForm.appendChild(dialoge);
-    header.appendChild(listForm);
+    dialoge.appendChild(listForm);
+    header.appendChild(dialoge);
     dialoge.showModal();
 }
 
 function createNewTask() {
-    const taskForm = document.createElement("form");
+
 
     const dialoge = document.createElement("dialog");
     dialoge.classList.add("dialoge");
 
+    const taskNameDiv = document.createElement("div");
+    taskNameDiv.classList.add("dialogueDiv");
     const taskNameLabel = document.createElement("label");
     taskNameLabel.setAttribute('for', 'taskName');
-    taskNameLabel.textContent = "Task Name";
-    dialoge.appendChild(taskNameLabel);
+    taskNameLabel.textContent = "Task Name: ";
+    taskNameDiv.appendChild(taskNameLabel);
     const taskNameInput = document.createElement("input");
     taskNameInput.setAttribute('id', 'taskName');
     taskNameInput.setAttribute('name', 'taskName');
     taskNameInput.setAttribute('type', 'text');
-    dialoge.appendChild(taskNameInput);
+    taskNameDiv.appendChild(taskNameInput);
+    dialoge.appendChild(taskNameDiv);
 
+
+    const taskDesDiv = document.createElement("div");
+    taskDesDiv.classList.add("dialogueDiv");
     const taskDescriptionLabel = document.createElement("label");
     taskDescriptionLabel.setAttribute('for', 'taskDescription');
-    taskDescriptionLabel.textContent = "Task Description";
-    dialoge.appendChild(taskDescriptionLabel);
+    taskDescriptionLabel.textContent = "Task Description: ";
+    taskDesDiv.appendChild(taskDescriptionLabel);
     const taskDescriptionInput = document.createElement("input");
     taskDescriptionInput.setAttribute('id', 'taskDescription');
     taskDescriptionInput.setAttribute('type', 'text');
     taskDescriptionInput.setAttribute('name', 'taskDescription');
-    dialoge.appendChild(taskDescriptionInput);
+    taskDesDiv.appendChild(taskDescriptionInput);
+    dialoge.appendChild(taskDesDiv);
 
+
+    const taskDateDiv = document.createElement("div");
+    taskDateDiv.classList.add("dialogueDiv");
     const taskDateLabel = document.createElement("label");
     taskDateLabel.setAttribute('for', 'taskDate');
-    taskDateLabel.textContent = "Task Date";
-    dialoge.appendChild(taskDateLabel);
+    taskDateLabel.textContent = "Task End Date: ";
+    taskDateDiv.appendChild(taskDateLabel);
     const taskDateInput = document.createElement("input");
     taskDateInput.setAttribute('id', 'taskDate');
     taskDateInput.setAttribute('type', 'date');
     taskDateInput.setAttribute('name', 'taskDate');
-    dialoge.appendChild(taskDateInput);
+    taskDateDiv.appendChild(taskDateInput);
+    dialoge.appendChild(taskDateDiv);
 
     const priorityHeader = document.createElement("p");
-    priorityHeader.textContent = "Select the priority:";
+    priorityHeader.textContent = "Select priority: ";
     dialoge.appendChild(priorityHeader);
+    priorityHeader.style.fontWeight = "600";
 
     const priorityList = ["High", "Medium", "Low"];
 
@@ -122,10 +143,13 @@ function createNewTask() {
     }
 
 
+    const taskButtons = document.createElement("div")
+    taskButtons.classList.add("taskButtons");
+
     const addBtn = document.createElement("button");
     addBtn.classList.add("taskAddButton");
     addBtn.textContent = "Add";
-    dialoge.appendChild(addBtn);
+    taskButtons.appendChild(addBtn);
 
     addBtn.addEventListener("click", () => {
         var radioSelected = document.querySelector('input[name="priority"]:checked');
@@ -137,12 +161,12 @@ function createNewTask() {
     const closeBtn = document.createElement("button");
     closeBtn.classList.add("taskCloseButton");
     closeBtn.textContent = "Close";
-    dialoge.appendChild(closeBtn);
+    taskButtons.appendChild(closeBtn);
 
     closeBtn.addEventListener("click", () => dialoge.close());
 
-    taskForm.appendChild(dialoge);
-    header.appendChild(taskForm);
+    dialoge.appendChild(taskButtons);
+    header.appendChild(dialoge);
     dialoge.showModal();
 
 
@@ -153,4 +177,3 @@ function createNewTask() {
 export { createHeader }
 
 
-// your create new task method should return something, so that value can be takedn to create list

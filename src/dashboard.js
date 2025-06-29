@@ -20,8 +20,26 @@ function showDashBoard() {
             listTitle.classList.add("listTitle");
             listTitle.textContent = tittle;
             listDiv.appendChild(listTitle);
+
+            for (let task of list.tasks) {
+                let taskDiv = document.createElement("div");
+                taskDiv.classList.add("taskDiv");
+                let taskTitle = document.createElement("h4")
+                taskTitle.classList.add("taskTitle");
+                taskTitle.textContent = task.taskName;
+
+                let taskDate = document.createElement("span");
+                taskDate.classList.add("taskDate");
+                taskDate.textContent = task.dueDate;
+
+
+                taskDiv.appendChild(taskTitle);
+                taskDiv.appendChild(taskDate);
+                listDiv.appendChild(taskDiv);
+            }
+
+
             mainContent.appendChild(listDiv);
-            // add functionality to show task names may be
         }
     }
 }
