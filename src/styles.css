@@ -19,7 +19,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1% 2%;
+    padding: 1em 1em;
     margin: 0.5em;
 }
 
@@ -163,4 +163,19 @@ dialog input {
     width: 20em;
     padding: 0.5em;
     background-color: rgba(31, 130, 200, 0.662);
+}
+
+/*.....footer....*/
+
+footer {
+    margin: 5px 0;
+    padding: 0.5em;
+    background-color: rgba(31, 130, 200, 0.862);
+    color: whitesmoke;
+    text-align: center;
+
+}
+
+footer p {
+    align-self: center;
 }
