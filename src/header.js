@@ -1,5 +1,5 @@
 import { createTask } from "./task";
-import { createList } from "./list";
+import { createList, listStorage } from "./list";
 import { showDashBoard } from "./dashboard";
 
 let header = document.querySelector("header");
@@ -142,6 +142,24 @@ function createNewTask() {
         dialoge.appendChild(priorityInput);
     }
 
+    const selectMenuDiv = document.createElement("div");
+    const selectMenulabel = document.createElement("label");
+    selectMenulabel.setAttribute("for", "selectMenu");
+    selectMenulabel.textContent = "Select the list (defaults to list being shown if not selected): ";
+    selectMenuDiv.appendChild(selectMenulabel);
+    const selectMenu = document.createElement("select");
+    selectMenu.setAttribute("id", "selectMenu");
+
+    listStorage.forEach(list => {
+        const option = document.createElement("option");
+        option.textContent = list.listName;
+        option.value = list.listName;
+        selectMenu.appendChild(option);
+    })
+    selectMenuDiv.appendChild(selectMenu);
+
+    dialoge.appendChild(selectMenuDiv);
+
 
     const taskButtons = document.createElement("div")
     taskButtons.classList.add("taskButtons");
@@ -154,6 +172,11 @@ function createNewTask() {
     addBtn.addEventListener("click", () => {
         var radioSelected = document.querySelector('input[name="priority"]:checked');
         var taskObj = createTask(taskNameInput.value, taskDescriptionInput.value, taskDateInput.value, radioSelected.value);
+        const selectList = selectMenu.value;
+
+        let index = listStorage.findIndex((i) => i.listName === selectList);
+        listStorage[index].tasks.push(taskObj);
+        showDashBoard();
 
         dialoge.close();
     })

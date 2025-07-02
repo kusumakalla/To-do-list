@@ -1,23 +1,13 @@
-import { listStorage } from "./list";
+import { taskStorage } from "./task";
 
 let mainContent = document.querySelector(".mainContent");
-function showList(listID) {
 
-    for (let i of listStorage) {
-        if (i.id === listID) {
-            displayTasks(i);
-        }
-    }
-}
-
-function displayTasks(list) {
+function showAllTasks() {
     mainContent.textContent = "";
-    const taskList = document.createElement("div");
-    taskList.classList.add("taskList");
-    const listHeader = document.createElement("h2");
-    listHeader.textContent = list.listName;
-    taskList.appendChild(listHeader);
-    for (let task of list.tasks) {
+    const taskListDiv = document.createElement("div");
+    for (let task of taskStorage) {
+
+
         const taskdiv = document.createElement("div");
         taskdiv.classList.add("displayTask")
 
@@ -63,6 +53,8 @@ function displayTasks(list) {
         })
 
         const buttonDiv = document.createElement("div");
+
+
         const SVG_NS = "http://www.w3.org/2000/svg";
         const deleteImage = document.createElementNS(SVG_NS, "svg");
         deleteImage.classList.add("icon");
@@ -75,18 +67,16 @@ function displayTasks(list) {
         buttonDiv.appendChild(deleteImage);
 
         deleteImage.addEventListener("click", () => {
-            list.tasks.splice(list.tasks.findIndex((i) => i.id === deleteImage.id), 1);
+            taskStorage.splice(taskStorage.findIndex((i) => i.id === deleteImage.id), 1);
             console.log(deleteImage.id);
-            displayTasks(list);
+            showAllTasks();
         })
 
         taskdiv.appendChild(statusDiv);
         taskdiv.appendChild(buttonDiv);
-        taskList.appendChild(taskdiv);
+        taskListDiv.appendChild(taskdiv)
     }
-    mainContent.appendChild(taskList);
-
+    mainContent.appendChild(taskListDiv);
 }
 
-export { showList };
-// 
+export { showAllTasks };

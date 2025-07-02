@@ -1,5 +1,5 @@
 import { loadHomePage } from "./loadHomePage";
-
+import { showAllTasks } from "./showAllTasks";
 
 function createSidebar() {
     const sidebar = document.querySelector(".sidebar");
@@ -55,6 +55,7 @@ function createSidebar() {
     tasksImage.appendChild(tasksPath);
     tasksDiv.appendChild(tasksImage);
 
+    tasksDiv.addEventListener("click", showAllTasks);
 
     const tasks = document.createElement("p");
     tasks.classList.add("sideIcons");

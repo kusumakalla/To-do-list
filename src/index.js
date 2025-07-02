@@ -1,9 +1,11 @@
 import "./styles.css"
 import { createTask, taskStorage } from "./task";
-import { createList } from "./list";
+import { createList, listStorage } from "./list";
 import { loadHomePage } from "./loadHomePage";
 
 console.log(taskStorage);
+console.log(listStorage);
+
 
 let task1 = createTask("Groceries", "Buy groceries from EasyBazar", "12-03-2025", "high");
 let task2 = createTask("Groceries1", "Buy groceries from EasyBazar111", "12-03-2025", "low");

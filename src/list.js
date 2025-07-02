@@ -14,4 +14,6 @@ function addToStorage(list) {
     listStorage.push(list);
 }
 
+createList("Untitled");
+
 export { listStorage, createList };

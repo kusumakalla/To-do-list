@@ -157,3 +157,10 @@ dialog input {
     position: relative;
     bottom: 0.5em;
 }
+
+.displayTask {
+    color: white;
+    width: 20em;
+    padding: 0.5em;
+    background-color: rgba(31, 130, 200, 0.662);
+}
