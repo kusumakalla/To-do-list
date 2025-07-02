@@ -5,8 +5,10 @@ import { loadHomePage } from "./loadHomePage";
 
 console.log(taskStorage);
 
-let task1 = createTask("Groceries", "Buy groceries from EasyBazar", "12-03-2025", 3);
-let task2 = createTask("Groceries1", "Buy groceries from EasyBazar111", "12-03-2025", 2);
+let task1 = createTask("Groceries", "Buy groceries from EasyBazar", "12-03-2025", "high");
+let task2 = createTask("Groceries1", "Buy groceries from EasyBazar111", "12-03-2025", "low");
+let task3 = createTask("sunscreen", "Buy sunscreen from Nykaa", "12-07-2025", "Medium");
 console.log(createList("Personal", task1, task2));
+console.log(createList("Skincare", task3));
 
 loadHomePage();

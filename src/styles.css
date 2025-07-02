@@ -5,13 +5,16 @@
 body {
     background-color: whitesmoke;
     display: grid;
+    grid-template-rows: auto 1fr auto;
+    /* header, main area, footer */
     grid-template-columns: 1fr 4fr;
+    min-height: 100vh;
 }
 
 header {
     font-size: x-large;
     color: rgba(31, 130, 200, 0.862);
-    height: 8vh;
+    height: 5vh;
     grid-column: 2/3;
     display: flex;
     justify-content: space-between;
@@ -57,6 +60,7 @@ footer {
     position: relative;
     bottom: 0;
     grid-column: 1/3;
+    background-color: whitesmoke;
 }
 
 .addListBtn {
@@ -96,10 +100,7 @@ dialog input {
 }
 
 
-.mainContent {
-    min-height: max(100%, calc(100vh - 20vh));
-    background-color: rgb(235, 235, 182);
-}
+/*.......sidebar.......*/
 
 .sidebar {
     background-color: rgba(31, 130, 200, 0.862);
@@ -120,4 +121,39 @@ dialog input {
 
 .dashboardDiv {
     font-size: 1.5em;
+}
+
+/*....main content .....*/
+.mainContent {
+    padding: 2em;
+    min-height: max(100%, calc(100vh - 40vh));
+    background-color: white;
+    color: black;
+}
+
+.listsContainer {
+    padding: 1em;
+    display: flex;
+    gap: 5em;
+    flex-wrap: wrap;
+}
+
+.listDiv {
+    color: white;
+    width: 20em;
+    padding: 0.5em;
+    background-color: rgba(31, 130, 200, 0.662);
+
+}
+
+.taskDiv {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.svgDiv {
+    text-align: end;
+    position: relative;
+    bottom: 0.5em;
 }
