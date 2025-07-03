@@ -170,6 +170,24 @@ dialog textarea {
     background-color: rgba(31, 130, 200, 0.662);
 }
 
+#highprior {
+    background-color: rgb(226, 81, 81);
+    opacity: 0.8;
+}
+
+#medprior {
+    background-color: rgb(204, 204, 75);
+}
+
+
+.taskList,
+.taskListDiv {
+    display: flex;
+    gap: 2em;
+}
+
+
+
 /*.....footer....*/
 
 footer {

@@ -1,5 +1,6 @@
 
 let listStorage = [];
+localStorage.setItem("listStorage", JSON.stringify(listStorage));
 
 function createList(listName, ...args) {
     let list = { listName, tasks: args };
@@ -12,6 +13,7 @@ function createList(listName, ...args) {
 
 function addToStorage(list) {
     listStorage.push(list);
+    localStorage.setItem("listStorage", JSON.stringify(listStorage));
 }
 
 createList("Untitled");

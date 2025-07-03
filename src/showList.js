@@ -12,11 +12,12 @@ function showList(listID) {
 
 function displayTasks(list) {
     mainContent.textContent = "";
-    const taskList = document.createElement("div");
-    taskList.classList.add("taskList");
     const listHeader = document.createElement("h2");
     listHeader.textContent = list.listName;
-    taskList.appendChild(listHeader);
+    mainContent.appendChild(listHeader);
+    const taskList = document.createElement("div");
+    taskList.classList.add("taskList");
+
     for (let task of list.tasks) {
         const taskdiv = document.createElement("div");
         taskdiv.classList.add("displayTask")
@@ -37,11 +38,9 @@ function displayTasks(list) {
         taskpriority.textContent = `Priority : ${task.priority}`;
 
         if (task.priority === 'High')
-            taskdiv.classList.add("highprior");
+            taskdiv.setAttribute("id", "highprior")
         else if (task.priority === 'Medium')
-            taskdiv.classList.add("medprior");
-        else
-            taskdiv.classList.add("lowprioir");
+            taskdiv.setAttribute("id", "medprior");
 
         taskdiv.appendChild(taskpriority);
 

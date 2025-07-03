@@ -43,43 +43,50 @@ function createNewList() {
 
 
     const dialoge = document.createElement("dialog");
-    const listForm = document.createElement("form");
-    listForm.classList.add("dialoge");
+
     const listNameLabel = document.createElement("label");
     listNameLabel.setAttribute('for', 'listName');
     listNameLabel.textContent = "List Name : ";
-    listForm.appendChild(listNameLabel);
+    dialoge.appendChild(listNameLabel);
     const listNameInput = document.createElement("input");
     listNameInput.setAttribute('id', 'listName');
     listNameInput.setAttribute('type', 'text');
-    listForm.appendChild(listNameInput);
+    dialoge.appendChild(listNameInput);
 
     const buttonDiv = document.createElement("div");
     buttonDiv.classList.add("taskButtons");
 
     const addListBtn = document.createElement("button");
     addListBtn.classList.add("addListBtn");
-    addListBtn.setAttribute("type", "button")
+    addListBtn.setAttribute("type", "button");
     addListBtn.textContent = "Create List";
     buttonDiv.appendChild(addListBtn);
 
     const closebtn = document.createElement("button");
+    addListBtn.setAttribute("type", "button");
     closebtn.textContent = "Close";
     buttonDiv.appendChild(closebtn);
 
-    closebtn.addEventListener("click", () => dialoge.close());
 
-    listForm.appendChild(buttonDiv);
+
+
+    dialoge.appendChild(buttonDiv);
 
     addListBtn.addEventListener("click", () => {
         let listNameEntered = listNameInput.value.trim();
         createList(listNameEntered);
         dialoge.close();
         showDashBoard();
-        // showDashBoard();
+
     }
     )
-    dialoge.appendChild(listForm);
+
+    closebtn.addEventListener("click", () => {
+        dialoge.close();
+        // showDashBoard();
+    });
+
+
     header.appendChild(dialoge);
     dialoge.showModal();
 }

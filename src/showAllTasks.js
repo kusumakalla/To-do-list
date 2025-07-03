@@ -5,6 +5,7 @@ let mainContent = document.querySelector(".mainContent");
 function showAllTasks() {
     mainContent.textContent = "";
     const taskListDiv = document.createElement("div");
+    taskListDiv.classList.add("taskListDiv");
     for (let task of taskStorage) {
 
 
@@ -27,11 +28,9 @@ function showAllTasks() {
         taskpriority.textContent = `Priority : ${task.priority}`;
 
         if (task.priority === 'High')
-            taskdiv.classList.add("highprior");
+            taskdiv.setAttribute("id", "highprior")
         else if (task.priority === 'Medium')
-            taskdiv.classList.add("medprior");
-        else
-            taskdiv.classList.add("lowprioir");
+            taskdiv.setAttribute("id", "medprior");
 
         taskdiv.appendChild(taskpriority);
 

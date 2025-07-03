@@ -1,4 +1,5 @@
 let taskStorage = [];
+localStorage.setItem("taskStorage", JSON.stringify(taskStorage));
 
 function createTask(taskName, description, dueDate, priority, status) {
     const task = { taskName, description, dueDate, priority, status };
@@ -12,6 +13,7 @@ function createTask(taskName, description, dueDate, priority, status) {
 
 function addToStorage(task) {
     taskStorage.push(task);
+    localStorage.setItem("taskStorage", JSON.stringify(taskStorage));
 }
 
 export { createTask, taskStorage };
