@@ -54,12 +54,22 @@ function createNewList() {
     listNameInput.setAttribute('type', 'text');
     listForm.appendChild(listNameInput);
 
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("taskButtons");
 
     const addListBtn = document.createElement("button");
     addListBtn.classList.add("addListBtn");
     addListBtn.setAttribute("type", "button")
     addListBtn.textContent = "Create List";
-    listForm.appendChild(addListBtn);
+    buttonDiv.appendChild(addListBtn);
+
+    const closebtn = document.createElement("button");
+    closebtn.textContent = "Close";
+    buttonDiv.appendChild(closebtn);
+
+    closebtn.addEventListener("click", () => dialoge.close());
+
+    listForm.appendChild(buttonDiv);
 
     addListBtn.addEventListener("click", () => {
         let listNameEntered = listNameInput.value.trim();
