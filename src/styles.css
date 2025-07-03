@@ -79,7 +79,8 @@ dialog label {
     font-weight: 600;
 }
 
-dialog input {
+dialog input,
+dialog textarea {
     background-color: rgba(31, 130, 200, 0.862);
     outline: none;
     padding: 5px 5px;
@@ -87,6 +88,10 @@ dialog input {
     color: whitesmoke;
     border: 2px solid whitesmoke;
 
+}
+
+dialog textarea {
+    width: 20em;
 }
 
 .dialogueDiv {

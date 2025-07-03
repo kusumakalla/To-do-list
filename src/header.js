@@ -110,10 +110,10 @@ function createNewTask() {
     taskDescriptionLabel.setAttribute('for', 'taskDescription');
     taskDescriptionLabel.textContent = "Task Description: ";
     taskDesDiv.appendChild(taskDescriptionLabel);
-    const taskDescriptionInput = document.createElement("input");
+    const taskDescriptionInput = document.createElement("textarea");
     taskDescriptionInput.setAttribute('id', 'taskDescription');
-    taskDescriptionInput.setAttribute('type', 'text');
-    taskDescriptionInput.setAttribute('name', 'taskDescription');
+    taskDescriptionInput.setAttribute('rows', '3');
+    taskDescriptionInput.setAttribute('columns', '60');
     taskDesDiv.appendChild(taskDescriptionInput);
     dialoge.appendChild(taskDesDiv);
 
