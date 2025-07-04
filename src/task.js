@@ -1,5 +1,5 @@
-let taskStorage = [];
-localStorage.setItem("taskStorage", JSON.stringify(taskStorage));
+let taskStorage = JSON.parse(localStorage.getItem("taskStorage")) || []
+
 
 function createTask(taskName, description, dueDate, priority, status) {
     const task = { taskName, description, dueDate, priority, status };

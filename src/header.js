@@ -1,5 +1,5 @@
 import { createTask } from "./task";
-import { createList, listStorage } from "./list";
+import { createList } from "./list";
 import { showDashBoard } from "./dashboard";
 
 let header = document.querySelector("header");
@@ -74,6 +74,10 @@ function createNewList() {
 
     addListBtn.addEventListener("click", () => {
         let listNameEntered = listNameInput.value.trim();
+        if (!listNameEntered) {
+            alert("please enter list name");
+            return;
+        }
         createList(listNameEntered);
         dialoge.close();
         showDashBoard();
@@ -107,6 +111,7 @@ function createNewTask() {
     taskNameInput.setAttribute('id', 'taskName');
     taskNameInput.setAttribute('name', 'taskName');
     taskNameInput.setAttribute('type', 'text');
+    taskNameInput.required = true;
     taskNameDiv.appendChild(taskNameInput);
     dialoge.appendChild(taskNameDiv);
 
@@ -121,6 +126,7 @@ function createNewTask() {
     taskDescriptionInput.setAttribute('id', 'taskDescription');
     taskDescriptionInput.setAttribute('rows', '3');
     taskDescriptionInput.setAttribute('columns', '60');
+    taskDescriptionInput.required = true;
     taskDesDiv.appendChild(taskDescriptionInput);
     dialoge.appendChild(taskDesDiv);
 
@@ -135,6 +141,9 @@ function createNewTask() {
     taskDateInput.setAttribute('id', 'taskDate');
     taskDateInput.setAttribute('type', 'date');
     taskDateInput.setAttribute('name', 'taskDate');
+    let currentDate = new Date().toISOString().split("T")[0];
+    taskDateInput.min = currentDate;
+    taskDateInput.required = true;
     taskDateDiv.appendChild(taskDateInput);
     dialoge.appendChild(taskDateDiv);
 
@@ -156,6 +165,7 @@ function createNewTask() {
         priorityInput.setAttribute('type', 'radio');
         priorityInput.setAttribute('name', 'priority');
         priorityInput.setAttribute('value', p);
+        priorityInput.required = true;
         dialoge.appendChild(priorityInput);
     }
 
@@ -167,7 +177,9 @@ function createNewTask() {
     const selectMenu = document.createElement("select");
     selectMenu.setAttribute("id", "selectMenu");
 
-    listStorage.forEach(list => {
+    let locaListStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
+
+    locaListStorage.forEach(list => {
         const option = document.createElement("option");
         option.textContent = list.listName;
         option.value = list.listName;
@@ -187,15 +199,33 @@ function createNewTask() {
     taskButtons.appendChild(addBtn);
 
     addBtn.addEventListener("click", () => {
-        var radioSelected = document.querySelector('input[name="priority"]:checked');
+        const taskName = taskNameInput.value.trim();
+        const taskDescription = taskDescriptionInput.value.trim();
+        const taskDate = taskDateInput.value;
+        const radioSelected = document.querySelector('input[name="priority"]:checked');
+        let locaListStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
+
+        if (locaListStorage.length === 0) {
+            alert("please create a list to add tasks");
+            dialoge.close();
+            return
+        }
+        if (!taskName || !taskDescription || !taskDate || !radioSelected) {
+            alert("Please enter all values and select a priority");
+            return;
+        }
+
+
         var taskObj = createTask(taskNameInput.value, taskDescriptionInput.value, taskDateInput.value, radioSelected.value);
         const selectList = selectMenu.value;
 
-        let index = listStorage.findIndex((i) => i.listName === selectList);
-        listStorage[index].tasks.push(taskObj);
+        let index = locaListStorage.findIndex((i) => i.listName === selectList);
+        locaListStorage[index].tasks.push(taskObj);
+        localStorage.setItem("listStorage", JSON.stringify(locaListStorage));
         showDashBoard();
 
         dialoge.close();
+
     })
 
     const closeBtn = document.createElement("button");

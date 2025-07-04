@@ -1,21 +1,23 @@
 
-let listStorage = [];
-localStorage.setItem("listStorage", JSON.stringify(listStorage));
+// let listStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
+
 
 function createList(listName, ...args) {
     let list = { listName, tasks: args };
     list.id = crypto.randomUUID();
     addToStorage(list);
     console.log("added to list");
-    console.log("lists =", listStorage);
     return list;
 }
 
 function addToStorage(list) {
-    listStorage.push(list);
-    localStorage.setItem("listStorage", JSON.stringify(listStorage));
+    let listStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
+    if (listStorage.findIndex((i) => i.listName === list.listName) === -1) {
+        listStorage.push(list);
+        localStorage.setItem("listStorage", JSON.stringify(listStorage));
+    }
 }
 
-createList("Untitled");
+// createList("Untitled");
 
-export { listStorage, createList };
+export { createList };

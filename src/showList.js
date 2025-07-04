@@ -1,8 +1,8 @@
-import { listStorage } from "./list";
+// let listStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
 
 let mainContent = document.querySelector(".mainContent");
 function showList(listID) {
-
+    let listStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
     for (let i of listStorage) {
         if (i.id === listID) {
             displayTasks(i);

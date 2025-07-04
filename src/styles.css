@@ -21,6 +21,8 @@ header {
     align-items: center;
     padding: 1em 1em;
     margin: 0.5em;
+    border-bottom: 2px inset rgba(31, 130, 200, 0.862);
+
 }
 
 .navListDiv {
@@ -183,6 +185,7 @@ dialog textarea {
 .taskList,
 .taskListDiv {
     display: flex;
+    flex-wrap: wrap;
     gap: 2em;
 }
 

@@ -1,4 +1,4 @@
-import { listStorage } from "./list";
+
 import { showList } from "./showList";
 
 let mainContent = document.querySelector(".mainContent");
@@ -13,10 +13,11 @@ function showDashBoard() {
 
     const listsContainer = document.createElement("div");
     listsContainer.classList.add("listsContainer");
-    if (listStorage.length == 0)
+    let locaListStorage = JSON.parse(localStorage.getItem("listStorage")) || [];
+    if (!locaListStorage || locaListStorage.length == 0)
         mainContent.textContent = "No created lists to show. Create one to get started";
     else {
-        for (let list of listStorage) {
+        for (let list of locaListStorage) {
             let tittle = list.listName;
             let listDiv = document.createElement("div");
             listDiv.classList.add("listDiv");
@@ -57,6 +58,7 @@ function showDashBoard() {
 
             editImage.addEventListener("click", () => {
                 showList(editImage.id);
+                console.log("edit call made");
             })
 
             const deleteImage = document.createElementNS(SVG_NS, "svg");
@@ -73,7 +75,8 @@ function showDashBoard() {
             listsContainer.appendChild(listDiv);
 
             deleteImage.addEventListener("click", () => {
-                listStorage.splice(listStorage.findIndex((i) => i.id === deleteImage.id), 1);
+                locaListStorage.splice(locaListStorage.findIndex((i) => i.id === deleteImage.id), 1);
+                localStorage.setItem("listStorage", JSON.stringify(locaListStorage));
                 showDashBoard();
             })
         }
